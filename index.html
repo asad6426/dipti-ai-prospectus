@@ -277,6 +277,22 @@
     .phase-num{ width:36px; height:36px; font-size:13px; }
     .phase:not(:last-child)::after{ left:17px; top:48px; }
   }
+
+  @media print{
+    body{ padding:0; background:#fff; }
+    .sheet{ box-shadow:none; border:none; max-width:100%; }
+    .navbar{ display:none; }
+    .kpi-wrap{ overflow:visible; }
+    table.cost, table.benefits{ min-width:0; width:100%; table-layout:fixed; font-size:10px; }
+    table.cost th, table.benefits th{ padding-right:6px; }
+    table.cost td, table.benefits td{
+      white-space:normal; word-break:break-word; padding:7px 6px 7px 0; max-width:none;
+    }
+    table.benefits td:first-child, table.cost td:first-child{ white-space:normal; }
+    .phase-detail{ max-height:none !important; }
+    .chevron{ display:none; }
+    section{ break-inside:avoid-page; }
+  }
 </style>
 </head>
 <body>
