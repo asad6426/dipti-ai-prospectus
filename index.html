@@ -231,6 +231,22 @@
   }
   .kpi-wrap{ overflow-x:auto; }
 
+  table.cost{ width:100%; border-collapse:collapse; font-size:14.5px; font-variant-numeric:tabular-nums; min-width:520px; }
+  table.cost th{
+    text-align:right; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint);
+    font-weight:600; padding:0 0 10px 14px; border-bottom:1px solid var(--line-strong);
+  }
+  table.cost th:first-child{ text-align:left; padding-left:0; }
+  table.cost td{ padding:12px 0 12px 14px; border-bottom:1px solid var(--line); color:var(--ink); }
+  table.cost td:first-child{ text-align:left; padding-left:0; font-weight:600; white-space:nowrap; }
+  table.cost td:not(:first-child){ text-align:right; }
+  table.cost tr:last-child td{ border-bottom:none; }
+  table.cost tr.highlight{ background:var(--surface-soft); }
+  table.cost tr.highlight td{ color:var(--ink); font-weight:600; }
+  table.cost tr.highlight td:first-child{ color:var(--accent); }
+  .h3-sub{ font-family:'Fraunces',serif; font-weight:600; font-size:16px; margin:26px 0 12px; color:var(--ink); }
+
   .next-steps{ background:var(--accent-soft); border-radius:12px; padding:24px 26px; }
   .next-steps h2{ color:var(--accent-ink); }
   .next-steps ul.plain li{ color:var(--accent-ink); }
@@ -275,6 +291,7 @@
       <a href="#phase-5">05</a>
       <a href="#revenue">Revenue</a>
       <a href="#proof">Proof</a>
+      <a href="#cost">Cost</a>
       <a href="#kpi">KPI</a>
       <a href="#next">Next</a>
     </div>
@@ -426,10 +443,37 @@
     </section>
 
     <section id="cost">
-      <h2>Technical &amp; Cost Considerations</h2>
-      <div class="callout">
-        <p><strong>Infrastructure:</strong> the current server is a personal rented GPU spot instance — fine for prototyping and demos, but scaling to a real number of concurrent students will need production-grade infrastructure. This cost should be planned for before a full Phase 2 rollout.</p>
-        <p><strong>Data privacy:</strong> student performance data — especially what's shared with parents — is sensitive, so proper access controls and consent are essential.</p>
+      <h2>Cost Estimate &amp; How to Minimize It</h2>
+      <p class="lede">Grounded in the real GPU server this project already runs on (Vast.ai, RTX 4090, $0.381/hr spot rate). Production needs a more reliable on-demand tier — estimated here at ~$0.45/hr — plus hosting, storage, and bandwidth.</p>
+
+      <div class="kpi-wrap">
+        <table class="cost">
+          <tr><th>Active students / month</th><th>Fixed infra</th><th>Compute (usage)</th><th>Total / month</th><th>Cost / student</th></tr>
+          <tr><td>100</td><td>$380</td><td>$7</td><td>$387</td><td>$3.87</td></tr>
+          <tr class="highlight"><td>500 — pilot cohort</td><td>$380</td><td>$35</td><td>$415</td><td>$0.83</td></tr>
+          <tr><td>1,000</td><td>$380</td><td>$70</td><td>$450</td><td>$0.45</td></tr>
+          <tr><td>2,500 — 2 GPUs</td><td>$760</td><td>$175</td><td>$935</td><td>$0.37</td></tr>
+          <tr><td>5,000 — 3 GPUs</td><td>$1,140</td><td>$350</td><td>$1,490</td><td>$0.30</td></tr>
+        </table>
+      </div>
+
+      <div class="callout" style="margin-top:16px;">
+        <p><strong>Why cost per student falls so fast:</strong> the server's fixed monthly cost barely moves as students are added — one RTX 4090 comfortably handles roughly 1,000-1,500 active students on a chat-dominant workload before a second GPU is needed. Compute itself is cheap: about $0.07-0.08 per student per month for a full month of AI tutoring, occasional diagrams, and optional video.</p>
+        <p><strong>Rent vs. buy:</strong> at ~$330/month for GPU compute alone, one RTX 4090 (~$1,700 retail) pays for itself in about 5-6 months of steady use — worth revisiting once Phase 2 is past the pilot stage.</p>
+      </div>
+
+      <h3 class="h3-sub">Ways We Already Cut Cost — and What's Next</h3>
+      <ul class="plain">
+        <li><strong>Right-sized models (done):</strong> FLUX.1-schnell instead of the larger FLUX.1-dev, and LTX-Video (~6GB) instead of HunyuanVideo (~50GB) — same task, a fraction of the compute per request</li>
+        <li><strong>Fast-response mode (done):</strong> disabling Muse Glimmer's reasoning trace for routine chat cuts response time from ~14s to ~2s — directly cutting GPU-seconds billed per message</li>
+        <li><strong>Gate the expensive feature:</strong> keep chat and image generation open to all students; make video generation a premium-tier feature, since it consumes the most compute per use</li>
+        <li><strong>Cache and reuse:</strong> generate shared course material (diagrams, quiz banks) once per course, not once per student</li>
+        <li><strong>Batch the non-urgent work:</strong> run content refreshes and auto-grading as nightly batch jobs instead of always-on real-time generation</li>
+        <li><strong>Scale to zero during the pilot:</strong> spin the GPU down outside class hours until usage is steady enough to justify 24/7 uptime</li>
+      </ul>
+
+      <div class="callout" style="margin-top:20px;">
+        <p><strong>Data privacy:</strong> student performance data — especially what's shared with parents — is sensitive, so proper access controls and consent are essential regardless of scale.</p>
       </div>
     </section>
 
