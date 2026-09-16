@@ -247,6 +247,17 @@
   table.cost tr.highlight td:first-child{ color:var(--accent); }
   .h3-sub{ font-family:'Fraunces',serif; font-weight:600; font-size:16px; margin:26px 0 12px; color:var(--ink); }
 
+  table.benefits{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:760px; }
+  table.benefits th{
+    text-align:left; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint);
+    font-weight:600; padding:0 16px 10px 0; border-bottom:1px solid var(--line-strong);
+  }
+  table.benefits td{ padding:13px 16px 13px 0; border-bottom:1px solid var(--line); vertical-align:top; color:var(--ink-soft); max-width:230px; }
+  table.benefits td:first-child{ font-family:'Fraunces',serif; font-weight:600; font-size:14.5px; color:var(--ink); max-width:190px; }
+  table.benefits tr:last-child td{ border-bottom:none; }
+  table.benefits tr:hover td{ background:var(--surface-soft); }
+
   .next-steps{ background:var(--accent-soft); border-radius:12px; padding:24px 26px; }
   .next-steps h2{ color:var(--accent-ink); }
   .next-steps ul.plain li{ color:var(--accent-ink); }
@@ -289,6 +300,7 @@
       <a href="#phase-3">03</a>
       <a href="#phase-4">04</a>
       <a href="#phase-5">05</a>
+      <a href="#benefits">Benefits</a>
       <a href="#revenue">Revenue</a>
       <a href="#proof">Proof</a>
       <a href="#cost">Cost</a>
@@ -413,6 +425,27 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <section id="benefits">
+      <h2>Who Gains What, Feature by Feature</h2>
+      <p class="lede">One system, three groups of people directly benefiting from each part of it — laid out so it's easy to see where the value actually lands.</p>
+      <div class="kpi-wrap">
+        <table class="benefits">
+          <tr><th>Feature</th><th>Student</th><th>Faculty / Trainer</th><th>Admin / Institute</th></tr>
+          <tr><td>Enrollment Chatbot</td><td>Instant answers anytime, no waiting for office hours</td><td>Fewer repetitive admission queries to handle by hand</td><td>Higher lead-to-enrollment conversion, works nights and holidays</td></tr>
+          <tr><td>AI Tutor &amp; Doubt-Clearing</td><td>Instant help on any topic, no waiting for the trainer's free time</td><td>Freed from answering the same basic questions over and over</td><td>Higher course completion and satisfaction scores</td></tr>
+          <tr><td>Performance Tracking</td><td>Sees real, objective progress instead of guessing</td><td>Sees real engagement data instead of self-reported claims</td><td>Institute-wide performance visibility across every batch</td></tr>
+          <tr><td>Multi-Stakeholder Dashboard</td><td>Tracks own growth over time in one place</td><td>Class-wide view — spot who's falling behind before it's too late</td><td>Leadership sees outcomes across the whole institute at a glance</td></tr>
+          <tr><td>Student Self-Assessment</td><td>Tests understanding anytime, instant feedback, no exam anxiety</td><td>Less time spent building and grading practice quizzes</td><td>Consistent quality-check across every batch and trainer</td></tr>
+          <tr><td>Personalized Roadmap + AI Guidance</td><td>Clear step-by-step path, gets unstuck instantly when blocked</td><td>Less one-on-one hand-holding for routine problems</td><td>A standardized learning path that improves overall pass rate</td></tr>
+          <tr><td>Activity-Based Content Delivery</td><td>Gets the right next lesson or practice automatically, not generic content</td><td>Sees which topics the whole batch is struggling with</td><td>Real data on exactly where the curriculum needs improvement</td></tr>
+          <tr><td>Institutional Feedback Loop</td><td>Benefits from courses that keep getting better over time</td><td>Gets suggested interventions based on what actually works</td><td>Data-driven curriculum decisions instead of guesswork</td></tr>
+          <tr><td>RAG-Based Job Matching</td><td>Sees relevant job openings matched to their own skill profile</td><td>Less time spent on manual career counseling and referrals</td><td>A stronger placement record — a real marketing differentiator</td></tr>
+          <tr><td>AI CV / Profile Builder</td><td>Gets a job-ready CV without needing a separate service</td><td>Less time coaching CV writing one student at a time</td><td>A new premium revenue stream (career-services package)</td></tr>
+          <tr><td>Internal Content-Generation Tool</td><td>Gets access to fresher, better-maintained course material</td><td>Hours saved building slides and quizzes from scratch</td><td>Lower cost and faster time-to-launch for new courses</td></tr>
+        </table>
       </div>
     </section>
 
