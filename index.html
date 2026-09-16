@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DIPTI AI Prospectus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEF0F5;
+    --surface:#FFFFFF;
+    --surface-soft:#F6F7FB;
+    --ink:#141C2E;
+    --ink-soft:#4B5670;
+    --ink-faint:#818CA3;
+    --accent:#B9852B;
+    --accent-ink:#3A2A08;
+    --accent-soft:#F3E6C8;
+    --line:#D7DCE8;
+    --line-strong:#B9C2D6;
+    --shadow: 0 1px 2px rgba(20,28,46,.04), 0 8px 24px rgba(20,28,46,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E1420; --surface:#161F30; --surface-soft:#131A29;
+      --ink:#E9ECF5; --ink-soft:#AAB3C8; --ink-faint:#7A8399;
+      --accent:#E2B458; --accent-ink:#241A02; --accent-soft:#2E260F;
+      --line:#293246; --line-strong:#3A455D;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E1420; --surface:#161F30; --surface-soft:#131A29;
+    --ink:#E9ECF5; --ink-soft:#AAB3C8; --ink-faint:#7A8399;
+    --accent:#E2B458; --accent-ink:#241A02; --accent-soft:#2E260F;
+    --line:#293246; --line-strong:#3A455D;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 28px rgba(0,0,0,.35);
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans','Noto Sans Bengali',sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    padding-inline:20px;
+    padding-block:40px 80px;
+  }
+  ::selection{ background:var(--accent-soft); color:var(--accent-ink); }
+  a{ color:inherit; }
+
+  .sheet{
+    max-width:760px;
+    margin-inline:auto;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+
+  .masthead{
+    padding:44px 48px 32px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono','Noto Sans Bengali',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+  }
+  h1{
+    font-family:'Fraunces','Noto Serif Bengali',serif;
+    font-weight:600;
+    font-size:clamp(28px,4.4vw,40px);
+    line-height:1.18;
+    letter-spacing:-.01em;
+    text-wrap:balance;
+    margin:0;
+  }
+  .subtitle{
+    font-family:'Fraunces','Noto Serif Bengali',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:17px;
+    color:var(--ink-soft);
+    line-height:1.55;
+    max-width:62ch;
+    margin:0;
+  }
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:24px; margin-top:8px;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-faint);
+  }
+  .meta-row span{ color:var(--ink-soft); font-weight:600; }
+
+  /* sticky jump nav + progress */
+  .navbar{
+    position:sticky;
+    top:env(safe-area-inset-top,0px);
+    z-index:5;
+    background:var(--surface);
+    border-block:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .navbar::-webkit-scrollbar{ display:none; }
+  .progress-track{ position:absolute; left:0; right:0; bottom:-1px; height:2px; background:transparent; }
+  .progress-fill{ height:100%; width:0%; background:var(--accent); transition:width .1s linear; }
+  .jumpnav{ display:flex; gap:2px; padding:10px 14px; white-space:nowrap; }
+  .jumpnav a{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.03em;
+    text-decoration:none;
+    color:var(--ink-faint);
+    padding:7px 11px;
+    border-radius:7px;
+    transition:background .15s, color .15s;
+  }
+  .jumpnav a:hover{ background:var(--surface-soft); color:var(--ink-soft); }
+  .jumpnav a.active{ background:var(--accent-soft); color:var(--accent-ink); font-weight:600; }
+
+  .content{ padding:8px 48px 12px; }
+
+  section{ padding-block:32px; border-bottom:1px solid var(--line); scroll-margin-top:56px; }
+  section:last-of-type{ border-bottom:none; }
+
+  h2{
+    font-family:'Fraunces','Noto Serif Bengali',serif;
+    font-weight:600; font-size:22px; letter-spacing:-.005em;
+    text-wrap:balance; margin:0 0 16px; color:var(--ink);
+  }
+  .lede{ margin:0 0 8px; max-width:66ch; color:var(--ink); }
+  .lede + .lede{ margin-top:12px; }
+
+  ul.plain{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+  ul.plain li{ position:relative; padding-left:20px; max-width:68ch; color:var(--ink); }
+  ul.plain li::before{
+    content:""; position:absolute; left:0; top:.62em;
+    width:6px; height:6px; border-radius:50%; background:var(--accent);
+  }
+  ul.plain li strong{ color:var(--ink); font-weight:600; }
+
+  /* Roadmap / phases */
+  .roadmap{ position:relative; display:flex; flex-direction:column; gap:0; }
+  .phase{ position:relative; display:grid; grid-template-columns:44px 1fr; gap:20px; padding-block:14px; scroll-margin-top:56px; }
+  .phase:not(:last-child)::after{
+    content:""; position:absolute; left:21px; top:56px; bottom:2px;
+    width:2px; background:var(--line-strong);
+  }
+  .phase-num{
+    width:44px; height:44px; border-radius:50%;
+    background:var(--accent-soft); color:var(--accent-ink);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:15px;
+    z-index:1; border:1px solid var(--accent); margin-top:8px;
+  }
+  .phase-main{ min-width:0; }
+  .phase-head{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    cursor:pointer; padding:8px 10px 8px 0; margin:0 -10px 0 0; border-radius:8px;
+    transition:background .15s;
+  }
+  .phase-head:hover{ background:var(--surface-soft); }
+  .phase-head:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  .phase-headline{ min-width:0; }
+  .phase-tag{
+    display:block; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:6px;
+  }
+  .phase-headline h3{
+    font-family:'Fraunces','Noto Serif Bengali',serif; font-weight:600;
+    font-size:18px; margin:0; color:var(--ink);
+  }
+  .chevron{
+    flex:none; width:22px; height:22px; margin-top:2px;
+    color:var(--ink-faint); transition:transform .25s ease;
+  }
+  .phase.collapsed .chevron{ transform:rotate(-90deg); }
+  .phase-detail{ overflow:hidden; transition:max-height .3s ease; }
+  .phase-detail-inner{ padding-top:2px; }
+  .phase-detail ul{ margin:10px 0 0; padding-left:18px; }
+  .phase-detail li{ margin-bottom:8px; max-width:64ch; color:var(--ink); }
+  .phase-detail li strong{ font-weight:600; }
+  .phase-detail p{ margin:6px 0 0; max-width:64ch; color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){
+    .phase-detail, .chevron{ transition:none; }
+  }
+
+  /* revenue grid */
+  .revenue-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .revenue-tile{
+    background:var(--surface-soft); border:1px solid var(--line); border-radius:10px;
+    padding:14px 16px; font-size:14.5px; color:var(--ink);
+  }
+  @media (max-width:520px){ .revenue-grid{ grid-template-columns:1fr; } }
+
+  /* proof list */
+  .proof-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .proof-list li{ display:flex; gap:10px; align-items:baseline; max-width:68ch; color:var(--ink); }
+  .proof-mark{ font-family:'IBM Plex Mono',monospace; color:var(--accent); font-weight:700; flex:none; }
+
+  .callout{
+    background:var(--surface-soft); border:1px solid var(--line); border-left:3px solid var(--accent);
+    border-radius:8px; padding:18px 20px; margin-top:4px;
+  }
+  .callout p{ margin:0 0 10px; max-width:64ch; color:var(--ink-soft); font-size:14.5px; }
+  .callout p:last-child{ margin-bottom:0; }
+  .callout p strong{ color:var(--ink); }
+
+  table.kpi{ width:100%; border-collapse:collapse; font-size:14.5px; }
+  table.kpi th{
+    text-align:left; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint);
+    font-weight:600; padding-bottom:10px; border-bottom:1px solid var(--line-strong);
+  }
+  table.kpi td{ padding:12px 12px 12px 0; border-bottom:1px solid var(--line); vertical-align:top; color:var(--ink); }
+  table.kpi td:first-child{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--accent);
+    white-space:nowrap; width:1%;
+  }
+  .kpi-wrap{ overflow-x:auto; }
+
+  .next-steps{ background:var(--accent-soft); border-radius:12px; padding:24px 26px; }
+  .next-steps h2{ color:var(--accent-ink); }
+  .next-steps ul.plain li{ color:var(--accent-ink); }
+  .next-steps ul.plain li strong{ color:var(--accent-ink); }
+  .next-steps ul.plain li::before{ background:var(--accent-ink); }
+
+  .colophon{
+    padding:24px 48px 40px; font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px; color:var(--ink-faint); line-height:1.7;
+  }
+
+  @media (max-width:600px){
+    .masthead{ padding:32px 24px 24px; }
+    .content{ padding:8px 24px 12px; }
+    .colophon{ padding:20px 24px 32px; }
+    .phase{ grid-template-columns:36px 1fr; gap:14px; }
+    .phase-num{ width:36px; height:36px; font-size:13px; }
+    .phase:not(:last-child)::after{ left:17px; top:48px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="masthead">
+    <div class="eyebrow">AI Integration Prospectus</div>
+    <h1>DIPTI-র জন্য AI-চালিত লার্নিং ও ক্যারিয়ার প্ল্যাটফর্ম</h1>
+    <p class="subtitle">Muse Glimmer AI Agent-কে dipti.com.bd এবং academic.dipti.com.bd-এ ধাপে ধাপে ইন্টিগ্রেট করে এনরোলমেন্ট, স্টুডেন্ট আউটকাম, এবং নতুন রেভিনিউ স্ট্রিম তৈরির পরিকল্পনা।</p>
+    <div class="meta-row">
+      <div>প্রস্তুতকারী: <span>DIPTI AI Platform Team</span></div>
+      <div>স্ট্যাটাস: <span>৫-ফেজ রোলআউট, Phase 1 ডেমো-রেডি</span></div>
+    </div>
+  </div>
+
+  <nav class="navbar">
+    <div class="jumpnav" id="jumpnav">
+      <a href="#problem">সমস্যা</a>
+      <a href="#phase-1">01</a>
+      <a href="#phase-2">02</a>
+      <a href="#phase-3">03</a>
+      <a href="#phase-4">04</a>
+      <a href="#phase-5">05</a>
+      <a href="#revenue">রেভিনিউ</a>
+      <a href="#proof">প্রমাণ</a>
+      <a href="#kpi">KPI</a>
+      <a href="#next">পরবর্তী</a>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  </nav>
+
+  <div class="content">
+
+    <section id="summary">
+      <h2>Executive Summary</h2>
+      <p class="lede">DIPTI ইতিমধ্যে একটি প্রতিষ্ঠিত প্রফেশনাল ট্রেনিং প্রতিষ্ঠান (প্রতিষ্ঠা ২০০৪), যার একটি মার্কেটিং ওয়েবসাইট (dipti.com.bd) এবং একটি আলাদা একাডেমিক পোর্টাল (academic.dipti.com.bd) আছে। বর্তমানে কোনো প্ল্যাটফর্মেই AI/chat সহায়তা নেই।</p>
+      <p class="lede">আমরা ইতিমধ্যে একটি কার্যকর AI Agent — <strong>Muse Glimmer</strong> (Meta-র 30B ওপেন এজেন্টিক মডেল) — তৈরি ও টেস্ট করেছি, যা চ্যাট, টুল-কলিং, এবং ছবি/ভিডিও জেনারেশনে সক্ষম। এই প্রস্তাবনা দেখায় কীভাবে এটিকে ধাপে ধাপে বসিয়ে এনরোলমেন্ট বাড়ানো, স্টুডেন্ট পারফরম্যান্স ও রিটেনশন উন্নত করা, চাকরি পাওয়া পর্যন্ত সহায়তা করা, এবং নতুন রেভিনিউ স্ট্রিম তৈরি করা যায় — ঝুঁকি কমিয়ে ধাপে ধাপে।</p>
+    </section>
+
+    <section id="problem">
+      <h2>সমস্যা ও সুযোগ</h2>
+      <ul class="plain">
+        <li>ওয়েবসাইটে কোনো chatbot নেই — সম্ভাব্য স্টুডেন্টের প্রশ্নের উত্তর দিতে মানুষ লাগে, রাত/ছুটির দিনে সাড়া দেওয়া যায় না</li>
+        <li>প্রতিটি স্টুডেন্টের জন্য personalized guidance দেওয়া ট্রেইনারদের পক্ষে সময়সাপেক্ষ — একই প্রশ্ন বারবার আসে</li>
+        <li>স্টুডেন্ট আসলে পড়াশোনা করছে কিনা, কোথায় আটকে যাচ্ছে — এটা ট্র্যাক করার কোনো সিস্টেম নেই</li>
+        <li>কোর্স শেষ হওয়ার পর চাকরি খোঁজা সম্পূর্ণ স্টুডেন্টের নিজের দায়িত্বে — সংযুক্ত কোনো ক্যারিয়ার সাপোর্ট নেই</li>
+        <li>প্রতিযোগী প্রতিষ্ঠানগুলোর (GoEdu, BSDI) তুলনায় এটি একটি স্পষ্ট ফাঁক এবং সুযোগ</li>
+      </ul>
+    </section>
+
+    <section id="roadmap">
+      <h2>প্রস্তাবিত সমাধান — ৫ ধাপে রোলআউট</h2>
+      <div class="roadmap">
+
+        <div class="phase" id="phase-1">
+          <div class="phase-num">01</div>
+          <div class="phase-main">
+            <div class="phase-head">
+              <div class="phase-headline">
+                <span class="phase-tag">dipti.com.bd · কম খরচ, দ্রুত ডেমো</span>
+                <h3>Enrollment AI Chatbot</h3>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="phase-detail"><div class="phase-detail-inner">
+              <p>মার্কেটিং সাইটে ২৪/৭ চ্যাটবট — prospective student-দের প্রশ্নের উত্তর দেবে, সঠিক কোর্স সাজেস্ট করবে, লিড ক্যাপচার করবে।</p>
+              <p><strong>কেন প্রথমে:</strong> conversion-rate বৃদ্ধির মাধ্যমে সরাসরি measurable impact দেখানো যায় — decision-maker-দের convince করার সবচেয়ে কার্যকর প্রথম পদক্ষেপ।</p>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="phase" id="phase-2">
+          <div class="phase-num">02</div>
+          <div class="phase-main">
+            <div class="phase-head">
+              <div class="phase-headline">
+                <span class="phase-tag">academic.dipti.com.bd · মূল অংশ</span>
+                <h3>AI Tutor ও Personalized Learning Companion</h3>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="phase-detail"><div class="phase-detail-inner">
+              <ul>
+                <li><strong>Performance Tracking:</strong> প্রজেক্ট সাবমিশন, টাস্ক কমপ্লিশন, কুইজ স্কোর, GitHub রিপো অ্যাক্টিভিটি — প্রকৃত engagement ডেটা, শুধু self-report নয়</li>
+                <li><strong>Multi-Stakeholder Dashboard:</strong> Trainer দেখবে ক্লাস-ওয়াইড প্রগ্রেস, Admin দেখবে ইনস্টিটিউট-ওয়াইড KPI, Parent দেখবে সন্তানের নির্দিষ্ট অগ্রগতি — বিশ্বাস ও রিটেনশন বাড়ায়</li>
+                <li><strong>Student Self-Assessment:</strong> যেকোনো সময় নিজের understanding টেস্ট করে সাথে সাথে ফিডব্যাক পাওয়া</li>
+                <li><strong>Personalized Roadmap + AI Guidance:</strong> কাঠামোগত রোডম্যাপ সম্পূর্ণ করতে এজেন্ট সাহায্য করবে, আটকে গেলে সমাধান সাজেস্ট করবে</li>
+                <li><strong>Activity-ভিত্তিক Content Delivery:</strong> অ্যাক্টিভিটি লগ বিশ্লেষণ করে সঠিক পরবর্তী কনটেন্ট/টাস্ক নিজে থেকেই সাজেস্ট করবে</li>
+                <li><strong>Institutional Feedback Loop:</strong> সব স্টুডেন্টের প্যাটার্ন দেখে সিস্টেম নিজেই কারিকুলাম টিমকে সাজেস্ট করবে কোন ফিচার যোগ করলে পারফরম্যান্স আরও ভালো হবে</li>
+              </ul>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="phase" id="phase-3">
+          <div class="phase-num">03</div>
+          <div class="phase-main">
+            <div class="phase-head">
+              <div class="phase-headline">
+                <span class="phase-tag">নতুন লেয়ার · placement-linked revenue</span>
+                <h3>Career Services ও Job-Matching</h3>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="phase-detail"><div class="phase-detail-inner">
+              <ul>
+                <li><strong>RAG-ভিত্তিক Job Matching:</strong> স্কিল প্রোফাইল ও কোর্স-কমপ্লিশন ডেটা বিশ্লেষণ করে প্রাসঙ্গিক চাকরি ব্যক্তিগত ড্যাশবোর্ডে দেখানো</li>
+                <li><strong>Profile/CV Builder:</strong> নির্দিষ্ট চাকরির জন্য উপযুক্ত প্রোফাইল ও CV তৈরিতে AI সহায়তা</li>
+                <li>একই ইউনিফায়েড প্ল্যাটফর্মে — বার্তা: <em>"আমরা শুধু ট্রেনিং দিই না, চাকরি পাওয়া পর্যন্ত পাশে থাকি"</em></li>
+              </ul>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="phase" id="phase-4">
+          <div class="phase-num">04</div>
+          <div class="phase-main">
+            <div class="phase-head">
+              <div class="phase-headline">
+                <span class="phase-tag">internal · operational savings</span>
+                <h3>স্টাফদের জন্য Content-Generation টুল</h3>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="phase-detail"><div class="phase-detail-inner">
+              <p>ইতিমধ্যে তৈরি ক্ষমতা (PDF/PPTX, কুইজ জেনারেশন) ট্রেইনার ও কন্টেন্ট টিমের ইন্টারনাল টুলে রূপান্তর — নতুন কোর্স তৈরির সময়/খরচ কমায়।</p>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="phase" id="phase-5">
+          <div class="phase-num">05</div>
+          <div class="phase-main">
+            <div class="phase-head">
+              <div class="phase-headline">
+                <span class="phase-tag">ambitious · B2B</span>
+                <h3>White-Label Licensing</h3>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="phase-detail"><div class="phase-detail-inner">
+              <p>পুরো সিস্টেম প্যাকেজ করে GoEdu, BSDI, HRDI-র মতো পার্টনার প্রতিষ্ঠানের কাছে SaaS প্রোডাক্ট হিসেবে লাইসেন্স — ট্রেনিং-এর বাইরে নতুন রেভিনিউ লাইন।</p>
+            </div></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="revenue">
+      <h2>রেভিনিউ মডেল সারসংক্ষেপ</h2>
+      <div class="revenue-grid">
+        <div class="revenue-tile">Premium AI-tutor সাবস্ক্রিপশন টায়ার</div>
+        <div class="revenue-tile">উচ্চতর এনরোলমেন্ট conversion rate</div>
+        <div class="revenue-tile">কর্পোরেট ট্রেনিং-এ প্রিমিয়াম প্রাইসিং</div>
+        <div class="revenue-tile">অ্যালামনাই চলমান অ্যাক্সেস সাবস্ক্রিপশন</div>
+        <div class="revenue-tile">Career-services প্যাকেজ / recruiter ফি</div>
+        <div class="revenue-tile">পার্টনার প্রতিষ্ঠানে B2B লাইসেন্সিং</div>
+        <div class="revenue-tile">কন্টেন্ট-জেনারেশন থেকে অপারেশনাল সাশ্রয়</div>
+        <div class="revenue-tile">কম doubt-clearing লোড, বেশি student/trainer</div>
+      </div>
+    </section>
+
+    <section id="proof">
+      <h2>যা ইতিমধ্যে তৈরি ও টেস্ট করা আছে</h2>
+      <ul class="proof-list">
+        <li><span class="proof-mark">✓</span><span><strong>Muse Glimmer</strong> (Meta-র 30B ওপেন এজেন্টিক মডেল) ডেডিকেটেড GPU সার্ভারে চলমান, চ্যাট ও টুল-কলিং টেস্ট করা হয়েছে</span></li>
+        <li><span class="proof-mark">✓</span><span>FastAPI ব্যাকএন্ড চ্যাট, ছবি জেনারেশন (FLUX.1-schnell), ও ভিডিও জেনারেশন (LTX-Video) সার্ভ করছে</span></li>
+        <li><span class="proof-mark">✓</span><span>প্রমাণিত agentic ক্ষমতা — ফাইল পড়া/লেখা, কোড রান, ডকুমেন্ট তৈরি — সরাসরি রোডম্যাপ-গাইডেন্স ও কন্টেন্ট-জেনারেশনে পুনর্ব্যবহারযোগ্য</span></li>
+      </ul>
+      <div class="callout" style="margin-top:16px;">
+        <p>অর্থাৎ <strong>Phase 1</strong> এবং <strong>Phase 2</strong>-র মূল AI-tutor অংশ শূন্য থেকে শুরু করতে হচ্ছে না।</p>
+      </div>
+    </section>
+
+    <section id="cost">
+      <h2>প্রযুক্তিগত ও খরচ বিবেচনা</h2>
+      <div class="callout">
+        <p><strong>ইনফ্রাস্ট্রাকচার:</strong> বর্তমান সার্ভার একটি ব্যক্তিগত ভাড়া করা GPU spot instance — প্রোটোটাইপ/ডেমোর জন্য উপযুক্ত, কিন্তু বাস্তব সংখ্যক concurrent স্টুডেন্টের জন্য স্কেল করতে প্রোডাকশন-গ্রেড ইনফ্রাস্ট্রাকচার দরকার — Phase 2 পূর্ণ রোলআউটের আগে এই খরচ হিসাব করতে হবে।</p>
+        <p><strong>ডেটা প্রাইভেসি:</strong> স্টুডেন্ট পারফরম্যান্স ডেটা (বিশেষত parent-দের সাথে শেয়ার করা) স্পর্শকাতর — সঠিক access-control ও consent ব্যবস্থা আবশ্যক।</p>
+      </div>
+    </section>
+
+    <section id="kpi">
+      <h2>সফলতা মাপার মানদণ্ড</h2>
+      <div class="kpi-wrap">
+        <table class="kpi">
+          <tr><th>Phase</th><th>মূল KPI</th></tr>
+          <tr><td>01</td><td>চ্যাটবট এনগেজমেন্ট রেট, লিড-টু-এনরোলমেন্ট conversion পরিবর্তন</td></tr>
+          <tr><td>02</td><td>কোর্স কমপ্লিশন রেট, কুইজ স্কোর উন্নতি, রিটেনশন/রিনিউয়াল, parent satisfaction</td></tr>
+          <tr><td>03</td><td>প্লেসমেন্ট রেট, চাকরি পেতে যে সময় লাগে, career-package আপসেল রেভিনিউ</td></tr>
+          <tr><td>04</td><td>কোর্স কনটেন্ট তৈরির সময় হ্রাস</td></tr>
+          <tr><td>05</td><td>লাইসেন্সিং পার্টনার সংখ্যা, B2B রেভিনিউ</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section id="next" style="border-bottom:none;">
+      <div class="next-steps">
+        <h2>পরবর্তী পদক্ষেপ</h2>
+        <ul class="plain">
+          <li><strong>এখনই:</strong> ইতিমধ্যে তৈরি এজেন্ট দিয়ে Phase 1 চ্যাটবটের একটি লাইভ ডেমো কর্তৃপক্ষকে দেখানো — সবচেয়ে কম রিস্কে সবচেয়ে জোরালো প্রমাণ</li>
+          <li><strong>এরপর:</strong> একটি নির্দিষ্ট কোর্স/ব্যাচে Phase 2-এর পাইলট, ফলাফল যাচাই করে পুরো একাডেমিক পোর্টালে বিস্তৃত করা</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="colophon">
+    DIPTI AI PLATFORM · Muse Glimmer (Meta, 30B) + FastAPI + FLUX.1-schnell + LTX-Video, RTX 4090
+  </div>
+</div>
+
+<script>
+(function(){
+  var progressFill = document.getElementById('progress-fill');
+  function updateProgress(){
+    var doc = document.documentElement;
+    var scrollable = doc.scrollHeight - doc.clientHeight;
+    var pct = scrollable > 0 ? (doc.scrollTop / scrollable) * 100 : 0;
+    progressFill.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('#jumpnav a'));
+  var targets = navLinks
+    .map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); })
+    .filter(Boolean);
+  function updateActive(){
+    var pos = window.scrollY + 100;
+    var current = targets[0];
+    targets.forEach(function(t){ if (t.offsetTop <= pos) current = t; });
+    navLinks.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current.id);
+    });
+  }
+  document.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+
+  document.querySelectorAll('.phase-head').forEach(function(head){
+    head.setAttribute('role', 'button');
+    head.setAttribute('tabindex', '0');
+    head.setAttribute('aria-expanded', 'true');
+    var phase = head.closest('.phase');
+    var detail = phase.querySelector('.phase-detail');
+    detail.style.maxHeight = detail.scrollHeight + 'px';
+
+    function toggle(){
+      var expanded = head.getAttribute('aria-expanded') !== 'false';
+      var next = !expanded;
+      head.setAttribute('aria-expanded', String(next));
+      phase.classList.toggle('collapsed', !next);
+      detail.style.maxHeight = next ? detail.scrollHeight + 'px' : '0px';
+    }
+    head.addEventListener('click', toggle);
+    head.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+    });
+  });
+
+  window.addEventListener('resize', function(){
+    document.querySelectorAll('.phase:not(.collapsed) .phase-detail').forEach(function(d){
+      d.style.maxHeight = d.scrollHeight + 'px';
+    });
+  });
+})();
+</script>
+</body>
+</html>
